@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Shop {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  name        String
+  city        String
+  description String
+  reviews     Review[]
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  shopId    Int
+  shop      Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  author    String
+  authorId  String
+  rating    Int
+  body      String
+  createdAt DateTime @default(now())
+
+  @@index([shopId])
+}

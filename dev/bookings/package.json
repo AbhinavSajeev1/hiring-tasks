@@ -1,0 +1,28 @@
+{
+  "name": "bookings",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "prisma generate",
+    "db:seed": "prisma db push --skip-generate",
+    "test": "DATABASE_URL=file:./test.db prisma db push --skip-generate --accept-data-loss > /dev/null && DATABASE_URL=file:./test.db vitest run"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prisma": "^6.19.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
