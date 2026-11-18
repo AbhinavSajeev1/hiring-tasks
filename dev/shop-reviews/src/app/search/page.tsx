@@ -5,12 +5,16 @@ type ShopRow = { id: number; slug: string; name: string; city: string };
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const { q = "" } = await searchParams;
+  const query = `%${q}%`;
 
   const results = q
-    ? await prisma.$queryRawUnsafe<ShopRow[]>(
-        `SELECT id, slug, name, city FROM Shop WHERE name LIKE '%${q}%' OR city LIKE '%${q}%' ORDER BY name`
-      )
-    : [];
+  ? await prisma.$queryRaw<ShopRow[]>`
+      SELECT id, slug, name, city
+      FROM Shop
+      WHERE name LIKE ${query} OR city LIKE ${query}
+      ORDER BY name
+    `
+  : [];
 
   return (
     <main>
