@@ -3,3 +3,7 @@ export function averageRating(ratings: number[]): number {
   const sum = ratings.reduce((a, b) => a + b, 0);
   return Math.round((sum / ratings.length) * 10) / 10;
 }
+
+export function isValidRating(n: number): boolean {
+  return Number.isInteger(n) && n >= 1 && n <= 5;
+}
